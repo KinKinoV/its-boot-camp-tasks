@@ -12,7 +12,7 @@ module "NodeJS-Demoapp-AutoScalingGroup" {
   vpc_zone_identifier       = module.AutoScaling-VPC.public_subnets
 
   launch_template_name        = "${var.env}-${var.common_name}-launch_template"
-  launch_template_description = "Launch templated created using Terraform for ${module.NodeJS-Demoapp-AutoScalingGroup.name}"
+  launch_template_description = "Launch templated created using Terraform."
   update_default_version      = true
 
   image_id          = data.aws_ami.amzlinux.id
