@@ -43,6 +43,6 @@ variable "max_ASG_capacity" {
 }
 
 variable "desired_ASG_capacity" {
-  description = "Desired ammount of instances in Auto Scaling Groupe"
+  description = "Desired ammount of instances in Auto Scaling Group"
   type = number
 }
