@@ -19,7 +19,7 @@ All listed inputs are required
 |------|-------------|------|--------|
 | env  |Infrastructure environment| `string` | - |
 | common_name | Common name prefix in infrastructure | `string` | - |
-|vpc_cidr|CIDR for VPC| `string` | [AutoScaling-VPC](/infrastructure/common/network.tf#L1) |
+|vpc_cidr|CIDR for VPC| `string` | [AutoScaling-VPC](/Week 3/Task 1 - Terraform/infrastructure/common/network.tf#L1) |
 |azs_names|List of AZ names for your region| `list(string)` | [AutoScaling-VPC](/infrastructure/common/network.tf#L1) |
 |public_subnets_cidr|List of CIDRs for public subnets| `list(string)` | [AutoScaling-VPC](/infrastructure/common/network.tf#L1) |
 |health_target| Path for Target Groups to check instance's health | `string` | [AutoScaling-ALB](/infrastructure/common/network.tf#L86) |
