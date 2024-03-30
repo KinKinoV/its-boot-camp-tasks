@@ -15,26 +15,17 @@ In this task I deployed AWS EC2 Auto Scaling Group using Terraform while adherin
 
 All listed inputs are required
 
-| Name | Description | Type |
-|------|-------------|------|
-| env  |Infrastructure environment| `string` |
-| common_name | Common name prefix in infrastructure | `string` |
-|------|-------------|------|
-|           VPC             |
-|------|-------------|------|
-|vpc_cidr|CIDR for VPC| `string` |
-|azs_names|List of AZ names for your region| `list(string)` |
-|public_subnets_cidr|List of CIDRs for public subnets| `list(string)` |
-|------|-------------|------|
-|       Target Group        |
-|------|-------------|------|
-|health_target| Path for Target Groups to check instance's health | `string` |
-|------|-------------|------|
-|    Auto Scaling Group     |
-|------|-------------|------|
-|min_ASG_capacity|Minimal ammount of instances in Auto Scaling Group| `number` |
-|max_ASG_capacity|Maximum ammount of instances in Auto Scaling Group| `number` |
-|desired_ASG_capacity|Desired ammount of instances in Auto Scaling Group| `number` |
+| Name | Description | Type | Module |
+|------|-------------|------|--------|
+| env  |Infrastructure environment| `string` | - |
+| common_name | Common name prefix in infrastructure | `string` | - |
+|vpc_cidr|CIDR for VPC| `string` | [AutoScaling-VPC](/infrastructure/network.tf#L1) |
+|azs_names|List of AZ names for your region| `list(string)` | [AutoScaling-VPC](/infrastructure/network.tf#L1) |
+|public_subnets_cidr|List of CIDRs for public subnets| `list(string)` | [AutoScaling-VPC](/infrastructure/network.tf#L1) |
+|health_target| Path for Target Groups to check instance's health | `string` | [AutoScaling-ALB](/infrastructure/network.tf#L86) |
+|min_ASG_capacity|Minimal ammount of instances in Auto Scaling Group| `number` | [NodeJS-Demoapp-AutoScalingGroup](/infrastructure/ec2.tf#L1) |
+|max_ASG_capacity|Maximum ammount of instances in Auto Scaling Group| `number` | [NodeJS-Demoapp-AutoScalingGroup](/infrastructure/ec2.tf#L1) |
+|desired_ASG_capacity|Desired ammount of instances in Auto Scaling Group| `number` | [NodeJS-Demoapp-AutoScalingGroup](/infrastructure/ec2.tf#L1) |
 
 ## Outputs
 
