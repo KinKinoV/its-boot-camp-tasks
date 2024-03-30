@@ -50,5 +50,18 @@ module "NodeJS-Demoapp-AutoScalingGroup" {
   
   target_group_arns = [module.AutoScaling-ALB.target_groups["nodejs_tg"]["arn"]]
 
+  scaling_policies = {
+    avg_cpu_more_50 = {
+      policy_type = "TargetTrackingScaling"
+      estimated_instance_warmup = 300
+      target_tracking_configuration = {
+        predefined_metric_specification = {
+          predefined_metric_type = "ASGAverageCPUUtilization"
+        }
+        target_value = 50.0
+      }
+    }
+  }
+
   user_data = filebase64("../../user_data/user-data.sh")
 }
