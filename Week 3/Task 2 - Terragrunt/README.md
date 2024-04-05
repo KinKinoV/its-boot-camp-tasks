@@ -12,4 +12,4 @@ Each stage uses locals defined in respective terragrunt.hcl files instead of .tf
 |[terraform-aws-modules/vpc/aws](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/5.7.0)|5.7.0|
 |[terraform-aws-modules/security-group/aws](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/5.1.2)|5.1.2|
 |[terraform-aws-modules/autoscaling/aws](https://registry.terraform.io/modules/terraform-aws-modules/autoscaling/aws/7.4.1)|7.4.1|
-|[terragrunt/modules/ec2](/Week%203/Task%202%20-%20Terragrunt/terragrunt/modules/ec2))|1.0.0|
+|[terragrunt/modules/ec2](/Week%203/Task%202%20-%20Terragrunt/terragrunt/modules/ec2)|1.0.0|
