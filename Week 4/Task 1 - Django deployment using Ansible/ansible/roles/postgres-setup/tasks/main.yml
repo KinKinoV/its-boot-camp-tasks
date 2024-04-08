@@ -1,0 +1,10 @@
+---
+# tasks file for postgres-setup
+- name: Install postgres
+  ansible.builtin.import_tasks: packages.yml
+  become: true
+
+- name: Configure DB
+  ansible.builtin.import_tasks: configure-db.yml
+  become: true
+  become_user: postgres

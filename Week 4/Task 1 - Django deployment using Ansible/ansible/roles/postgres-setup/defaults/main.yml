@@ -1,0 +1,5 @@
+---
+# defaults file for postgres-setup
+db_name: default_db
+db_password: unsecure_password!
+db_user: default_user

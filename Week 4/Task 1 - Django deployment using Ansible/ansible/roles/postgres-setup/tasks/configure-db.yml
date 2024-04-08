@@ -1,0 +1,37 @@
+---
+- name: Create Django DB
+  community.postgresql.postgresql_db:
+    name: "{{ db_name }}"
+    state: present
+
+- name: Create DB user
+  community.postgresql.postgresql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    state: present
+
+- name: Grant DB user access to Django DB
+  community.postgresql.postgresql_privs:
+    type: database
+    database: "{{ db_name }}"
+    roles: "{{ db_user }}"
+    privs: ALL
+
+- name: Allow MD5 connections for the DB user
+  community.postgresql.postgresql_pg_hba:
+    dest: "/etc/postgresql/14/main/pg_hba.conf"
+    contype: host
+    databases: all
+    users: all
+    address: 0.0.0.0/0
+    method: md5
+    create: true
+  notify: 'restart postgres'
+
+- name: Listen on all addresses for connecction
+  ansible.builtin.lineinfile:
+    dest: "/etc/postgresql/{{ postgres_ver }}/main/postgresql.conf"
+    regexp: "^#listen_addresses = 'localhost'"
+    state: present
+    line: "listen_addresses = '*'"
+  notify: 'restart postgres'

@@ -1,0 +1,28 @@
+---
+- name: Install psycopg2 for ansible.community.postgresql
+  ansible.builtin.pip:
+    name: psycopg2-binary
+
+- name: Add key for postgres repository
+  ansible.builtin.apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: Add postgres repository to sources list
+  ansible.builtin.apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_facts['lsb']['codename'] }}-pgdg main"
+    state: present
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: "Install postgresql-{{ postgres_ver }}"
+  ansible.builtin.apt:
+    pkg: "postgresql-{{ postgres_ver }}"
+    state: present
+
+- name: Start PostgreSQL service
+  ansible.builtin.service:
+    name: postgresql
+    state: started

@@ -1,0 +1,8 @@
+---
+# vars file for postgres-setup
+# PostgreSQL installation
+postgres_ver: 14
+# PostgreSQL configuration
+db_name: django_db
+db_password:
+db_user: django_user
