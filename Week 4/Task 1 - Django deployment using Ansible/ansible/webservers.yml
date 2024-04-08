@@ -1,0 +1,5 @@
+---
+- name: Configuring EC2 instances to have needed dependencies
+  hosts: all
+  roles:
+    - webserver-setup
