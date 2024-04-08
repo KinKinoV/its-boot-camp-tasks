@@ -19,15 +19,15 @@ Role Variables
 --------------
 
 Environment:
-  - `DATABASE_URL`: 
-  - `ALLOWED_HOSTS`:
+  - `DATABASE_URL`: dj_database_url formated url to database
+  - `ALLOWED_HOSTS`: comma separated string of allowed host for Django
 
 Variables:
-  - db_name:
-  - db_user:
-  - db_password:
-  - django_dir:
-  - django_port:
+  - db_name: Database name
+  - db_user: Name of database user
+  - db_password: Password for database
+  - django_dir: Path to where copy sample-django project
+  - django_port: port on which Django development server should run
 
 Dependencies
 ------------
