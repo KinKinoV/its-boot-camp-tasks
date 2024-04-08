@@ -1,0 +1,7 @@
+---
+- name: Installing Postgres and configuring user
+  hosts: all
+  vars_files:
+    - common_vars.yml
+  roles:
+    - postgres-setup
