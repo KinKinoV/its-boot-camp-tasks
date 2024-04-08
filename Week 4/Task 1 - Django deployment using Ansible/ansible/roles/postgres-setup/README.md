@@ -26,6 +26,7 @@ None
 Example Playbook
 ----------------
 
+```yml
 - hosts: database
   roles:
     - role: postgres-setup
@@ -33,6 +34,7 @@ Example Playbook
       db_user: new_user
       db_password: newpassword4newdb
       postgres_ver: 14
+```
 
 License
 -------
