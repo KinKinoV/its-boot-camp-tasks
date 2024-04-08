@@ -1,0 +1,11 @@
+---
+# tasks file for deploy
+- name: Configure environment
+  ansible.builtin.import_tasks: envs.yml
+  become: true
+
+- name: Migrate data to PostgreSQL
+  ansible.builtin.import_tasks: migrations.yml
+
+- name: Start Django Dev Server
+  ansible.builtin.import_tasks: run-server.yml

@@ -1,0 +1,7 @@
+---
+- name: Start Django Dev Server
+  community.general.django_manage:
+    command: "runserver 0.0.0.0:{{ django_port }}"
+    project_path: "{{ django_dir }}"
+  async: 10000000000
+  poll: 0

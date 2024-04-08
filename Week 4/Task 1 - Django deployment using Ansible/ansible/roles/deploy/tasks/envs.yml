@@ -1,0 +1,46 @@
+---
+# Configure nginx site to pass requests to Django
+- name: Add sample-django.conf to available sites
+  ansible.builtin.template:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/templates/sample-django.j2"
+    dest: /etc/nginx/sites-available/sample-django.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Disable default site
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Enable sample-django.conf site
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/sample-django.conf
+    dest: /etc/nginx/sites-enabled/sample-django.conf
+    owner: root
+    group: root
+    state: link
+  notify: 'restart nginx'
+
+# Copy sample-django project
+- name: Download sample-django source code
+  ansible.builtin.git:
+    repo: 'https://github.com/digitalocean/sample-django.git'
+    dest: "{{ django_dir }}"
+    clone: true
+    update: true
+    force: true
+
+- name: Replace shebang in manage.py with correct python directive
+  ansible.builtin.lineinfile:
+    path: "{{ django_dir }}/manage.py"
+    regexp: "^#!/usr/bin/env python"
+    state: present
+    line: "#!/usr/bin/env python3"
+
+- name: Make manage.py executable for django_manage module
+  ansible.builtin.file:
+    path: "{{ django_dir }}/manage.py"
+    owner: root
+    group: root
+    mode: '0755'

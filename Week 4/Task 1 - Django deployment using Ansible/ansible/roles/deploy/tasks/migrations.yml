@@ -1,0 +1,10 @@
+---
+- name: Make migrations
+  community.general.django_manage:
+    command: makemigrations
+    project_path: "{{ django_dir }}"
+
+- name: Migrate data to DB
+  community.general.django_manage:
+    command: migrate
+    project_path: "{{ django_dir }}"
