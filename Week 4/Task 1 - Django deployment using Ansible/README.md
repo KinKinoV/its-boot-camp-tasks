@@ -6,9 +6,9 @@ In this task I created needed infrastructure to deploy Djnago app [sample-django
 
 Made 3 playbooks (webservers.yml, db.yml, deploy.yml) that are using roles to configure remote nodes.
 Roles created:
-    1. [webservers-setup](/Week%204/Task%201%20-%20Django%20deployment%20using%20Ansible/ansible/roles/webserver-setup/README.md)
-    2. [postgres-setup](/Week%204/Task%201%20-%20Django%20deployment%20using%20Ansible/ansible/roles/postgres-setup/README.md)
-    3. [deploy](/Week%204/Task%201%20-%20Django%20deployment%20using%20Ansible/ansible/roles/deploy/README.md)
+  1. [webservers-setup](/Week%204/Task%201%20-%20Django%20deployment%20using%20Ansible/ansible/roles/webserver-setup/README.md)
+  2. [postgres-setup](/Week%204/Task%201%20-%20Django%20deployment%20using%20Ansible/ansible/roles/postgres-setup/README.md)
+  3. [deploy](/Week%204/Task%201%20-%20Django%20deployment%20using%20Ansible/ansible/roles/deploy/README.md)
 
 # Terraform
 ## Modules Used
