@@ -1,0 +1,10 @@
+---
+- name: Deploying sample-django and making migrations
+  hosts: all
+  vars_files:
+    - common_vars.yml
+  environment:
+    DATABASE_URL: "postgres://{{ db_user }}:{{ db_password }}@{{ postgres_host }}/{{ db_name }}"
+    ALLOWED_HOSTS: "{{ allowed_hosts }}"
+  roles:
+    - deploy
