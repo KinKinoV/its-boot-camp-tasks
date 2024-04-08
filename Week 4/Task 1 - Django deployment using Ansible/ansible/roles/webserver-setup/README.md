@@ -22,9 +22,11 @@ None
 Example Playbook
 ----------------
 
+```yml
 - hosts: servers
   roles:
     - webserver-setup
+```
 
 License
 -------
