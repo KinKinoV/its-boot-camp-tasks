@@ -36,7 +36,7 @@ This role should be run AFTER `webservers-setup` and `postgres-setup` roles.
 
 Example Playbook
 ----------------
-
+```yml
 - name: Deploying django and making migrations
   hosts: webservers
   vars_files:
@@ -46,7 +46,7 @@ Example Playbook
     ALLOWED_HOSTS: "{{ allowed_hosts }}"
   roles:
     - deploy
-
+```
 
 License
 -------
