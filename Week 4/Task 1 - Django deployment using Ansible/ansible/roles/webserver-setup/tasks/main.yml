@@ -1,0 +1,13 @@
+---
+# tasks file for webserver-setup
+- name: Ensure pip is installed
+  ansible.builtin.apt:
+    name: python3-pip
+    state: present
+
+- name: Install python package dependencies needed for sample-django
+  ansible.builtin.import_tasks: python-install.yml
+
+- name: Install and configure Nginx for serving sample-django
+  ansible.builtin.import_tasks: nginx-install.yml
+  become: true

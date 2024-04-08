@@ -1,0 +1,32 @@
+---
+- name: Install asgiref python package on version 3.5.0
+  ansible.builtin.pip:
+    name: asgiref==3.5.0
+
+- name: Install backports.zoneinfo python package on version 0.2.1
+  ansible.builtin.pip:
+    name: backports.zoneinfo==0.2.1
+
+- name: Install dj-database-url python package on version 0.5.0
+  ansible.builtin.pip:
+    name: dj-database-url==0.5.0
+
+- name: Install Django python package on version 4.0.3
+  ansible.builtin.pip:
+    name: Django==4.0.3
+
+- name: Install gunicorn python package on version 20.1.0
+  ansible.builtin.pip:
+    name: gunicorn==20.1.0
+
+- name: Install psycopg2-binary python package on version 2.9.3
+  ansible.builtin.pip:
+    name: psycopg2-binary==2.9.3
+
+- name: Install sqlparse python package on version 0.4.2
+  ansible.builtin.pip:
+    name: sqlparse==0.4.2
+
+- name: Install whitenoise python package on version 6.0.0
+  ansible.builtin.pip:
+    name: whitenoise==6.0.0

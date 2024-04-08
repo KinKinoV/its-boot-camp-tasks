@@ -1,0 +1,7 @@
+---
+# handlers file for webserver-setup
+- name: Start Nginx service
+  ansible.builtin.service:
+    name: nginx
+    state: started
+  listen: 'start nginx'
