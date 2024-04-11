@@ -20,7 +20,7 @@ Used [Dockerfile](https://github.com/KinKinoV/sample-django-docker/blob/main/Doc
 ### Inputs
 
 All listed inputs are required
-Week%205/Task%201%20-%20Contenerize%20app
+
 | Name | Description | Type | Module |
 |------|-------------|------|--------|
 | vpc_cidr | CIDR for Ansible VPC | `string` | [Docker_VPC](Week%205/Task%201%20-%20Contenerize%20app/vpc.tf#L6) |
