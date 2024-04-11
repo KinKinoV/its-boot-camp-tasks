@@ -23,15 +23,15 @@ All listed inputs are required
 
 | Name | Description | Type | Module |
 |------|-------------|------|--------|
-| vpc_cidr | CIDR for Ansible VPC | `string` | [Docker_VPC](Week%205/Task%201%20-%20Contenerize%20app/vpc.tf#L6) |
-| azs | List of AZs where to create subnets | `list(string)` | [Docker_VPC](Week%205/Task%201%20-%20Contenerize%20app/vpc.tf#L8) |
-| health_target | Path for Target Group to check health of instances | `string` | [Docker-ALB](Week%205/Task%201%20-%20Contenerize%20app/alb.tf#L60) |
-| docker_image | Tag of the Docker image to use | `string` | [ecs-service](Week%205/Task%201%20-%20Contenerize%20app/ecs.tf#L42) |
-| container_port | Port for the container to listen on | `number` | [ecs-service](Week%205/Task%201%20-%20Contenerize%20app/ecs.tf#L48) |
-| db_name | Name of the database to be created | `string` | [postgres_DB](Week%205/Task%201%20-%20Contenerize%20app/rds.tf#L17) |
-| db_user | Username for newly created user of DB | `string` | [postgres_DB](Week%205/Task%201%20-%20Contenerize%20app/rds.tf#L18) |
-| db_port | Port on which DB should listen for connections | `string` | [postgres_DB](Week%205/Task%201%20-%20Contenerize%20app/rds.tf#L20) |
-| db_password | Password for the database | `string`, sensitive:`true` | [postgres_DB](Week%205/Task%201%20-%20Contenerize%20app/rds.tf#L19) |
+| vpc_cidr | CIDR for Ansible VPC | `string` | [Docker_VPC](/Week%205/Task%201%20-%20Contenerize%20app/vpc.tf#L6) |
+| azs | List of AZs where to create subnets | `list(string)` | [Docker_VPC](/Week%205/Task%201%20-%20Contenerize%20app/vpc.tf#L8) |
+| health_target | Path for Target Group to check health of instances | `string` | [Docker-ALB](/Week%205/Task%201%20-%20Contenerize%20app/alb.tf#L60) |
+| docker_image | Tag of the Docker image to use | `string` | [ecs-service](/Week%205/Task%201%20-%20Contenerize%20app/ecs.tf#L42) |
+| container_port | Port for the container to listen on | `number` | [ecs-service](/Week%205/Task%201%20-%20Contenerize%20app/ecs.tf#L48) |
+| db_name | Name of the database to be created | `string` | [postgres_DB](/Week%205/Task%201%20-%20Contenerize%20app/rds.tf#L17) |
+| db_user | Username for newly created user of DB | `string` | [postgres_DB](/Week%205/Task%201%20-%20Contenerize%20app/rds.tf#L18) |
+| db_port | Port on which DB should listen for connections | `string` | [postgres_DB](/Week%205/Task%201%20-%20Contenerize%20app/rds.tf#L20) |
+| db_password | Password for the database | `string`, sensitive:`true` | [postgres_DB](/Week%205/Task%201%20-%20Contenerize%20app/rds.tf#L19) |
 
 ### Outputs
 
