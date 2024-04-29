@@ -1,0 +1,30 @@
+repositories:
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+  - name: jetstack
+    url: https://charts.jetstack.io
+
+releases:
+  - name: nginx-ingress
+    chart: ingress-nginx/ingress-nginx
+    version: v4.10.1
+    namespace: default
+    set:
+      - name: controller.publishService.enabled
+        value: true
+  
+  - name: cert-manager
+    chart: jetstack/cert-manager
+    namespace: cert-manager
+    version: v1.14.5
+    set:
+      - name: installCRDs
+        value: true
+  
+  - name: sample-django
+    chart: ../sample-django
+    namespace: default
+    values:
+      - values.yaml
+    secrets:
+      - secrets.yaml
