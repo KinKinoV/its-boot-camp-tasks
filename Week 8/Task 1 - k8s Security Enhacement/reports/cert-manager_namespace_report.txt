@@ -1,0 +1,440 @@
+
+namespace: cert-manager, deployment: cert-manager-cainjector (kubernetes)
+=========================================================================
+Tests: 139 (SUCCESSES: 133, FAILURES: 6, EXCEPTIONS: 0)
+Failures: 6 (UNKNOWN: 0, LOW: 6, MEDIUM: 0, HIGH: 0, CRITICAL: 0)
+
+LOW: Container 'cert-manager-cainjector' of Deployment 'cert-manager-cainjector' should set 'resources.limits.cpu'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing CPU limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv011
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-cainjector:49-69
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --leader-election-namespace=kube-system
+  52 │                   env:
+  53 │                     - name: POD_NAMESPACE
+  54 │                       valueFrom:
+  55 │                         fieldRef:
+  56 │                             apiVersion: v1
+  57 └                             fieldPath: metadata.namespace
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-cainjector' of Deployment 'cert-manager-cainjector' should set 'resources.requests.cpu'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have resource requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv015
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-cainjector:49-69
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --leader-election-namespace=kube-system
+  52 │                   env:
+  53 │                     - name: POD_NAMESPACE
+  54 │                       valueFrom:
+  55 │                         fieldRef:
+  56 │                             apiVersion: v1
+  57 └                             fieldPath: metadata.namespace
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-cainjector' of Deployment 'cert-manager-cainjector' should set 'resources.requests.memory'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv016
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-cainjector:49-69
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --leader-election-namespace=kube-system
+  52 │                   env:
+  53 │                     - name: POD_NAMESPACE
+  54 │                       valueFrom:
+  55 │                         fieldRef:
+  56 │                             apiVersion: v1
+  57 └                             fieldPath: metadata.namespace
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-cainjector' of Deployment 'cert-manager-cainjector' should set 'resources.limits.memory'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing memory limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv018
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-cainjector:49-69
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --leader-election-namespace=kube-system
+  52 │                   env:
+  53 │                     - name: POD_NAMESPACE
+  54 │                       valueFrom:
+  55 │                         fieldRef:
+  56 │                             apiVersion: v1
+  57 └                             fieldPath: metadata.namespace
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-cainjector' of Deployment 'cert-manager-cainjector' should set 'securityContext.runAsUser' > 10000
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv020
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-cainjector:49-69
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --leader-election-namespace=kube-system
+  52 │                   env:
+  53 │                     - name: POD_NAMESPACE
+  54 │                       valueFrom:
+  55 │                         fieldRef:
+  56 │                             apiVersion: v1
+  57 └                             fieldPath: metadata.namespace
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-cainjector' of Deployment 'cert-manager-cainjector' should set 'securityContext.runAsGroup' > 10000
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv021
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-cainjector:49-69
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --leader-election-namespace=kube-system
+  52 │                   env:
+  53 │                     - name: POD_NAMESPACE
+  54 │                       valueFrom:
+  55 │                         fieldRef:
+  56 │                             apiVersion: v1
+  57 └                             fieldPath: metadata.namespace
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+namespace: cert-manager, deployment: cert-manager (kubernetes)
+==============================================================
+Tests: 139 (SUCCESSES: 133, FAILURES: 6, EXCEPTIONS: 0)
+Failures: 6 (UNKNOWN: 0, LOW: 6, MEDIUM: 0, HIGH: 0, CRITICAL: 0)
+
+LOW: Container 'cert-manager-controller' of Deployment 'cert-manager' should set 'resources.limits.cpu'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing CPU limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv011
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager:53-93
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  53 ┌                 - args:
+  54 │                     - --v=2
+  55 │                     - --cluster-resource-namespace=$(POD_NAMESPACE)
+  56 │                     - --leader-election-namespace=kube-system
+  57 │                     - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.14.5
+  58 │                     - --max-concurrent-challenges=60
+  59 │                   env:
+  60 │                     - name: POD_NAMESPACE
+  61 └                       valueFrom:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-controller' of Deployment 'cert-manager' should set 'resources.requests.cpu'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have resource requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv015
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager:53-93
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  53 ┌                 - args:
+  54 │                     - --v=2
+  55 │                     - --cluster-resource-namespace=$(POD_NAMESPACE)
+  56 │                     - --leader-election-namespace=kube-system
+  57 │                     - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.14.5
+  58 │                     - --max-concurrent-challenges=60
+  59 │                   env:
+  60 │                     - name: POD_NAMESPACE
+  61 └                       valueFrom:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-controller' of Deployment 'cert-manager' should set 'resources.requests.memory'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv016
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager:53-93
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  53 ┌                 - args:
+  54 │                     - --v=2
+  55 │                     - --cluster-resource-namespace=$(POD_NAMESPACE)
+  56 │                     - --leader-election-namespace=kube-system
+  57 │                     - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.14.5
+  58 │                     - --max-concurrent-challenges=60
+  59 │                   env:
+  60 │                     - name: POD_NAMESPACE
+  61 └                       valueFrom:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-controller' of Deployment 'cert-manager' should set 'resources.limits.memory'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing memory limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv018
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager:53-93
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  53 ┌                 - args:
+  54 │                     - --v=2
+  55 │                     - --cluster-resource-namespace=$(POD_NAMESPACE)
+  56 │                     - --leader-election-namespace=kube-system
+  57 │                     - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.14.5
+  58 │                     - --max-concurrent-challenges=60
+  59 │                   env:
+  60 │                     - name: POD_NAMESPACE
+  61 └                       valueFrom:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-controller' of Deployment 'cert-manager' should set 'securityContext.runAsUser' > 10000
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv020
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager:53-93
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  53 ┌                 - args:
+  54 │                     - --v=2
+  55 │                     - --cluster-resource-namespace=$(POD_NAMESPACE)
+  56 │                     - --leader-election-namespace=kube-system
+  57 │                     - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.14.5
+  58 │                     - --max-concurrent-challenges=60
+  59 │                   env:
+  60 │                     - name: POD_NAMESPACE
+  61 └                       valueFrom:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-controller' of Deployment 'cert-manager' should set 'securityContext.runAsGroup' > 10000
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv021
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager:53-93
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  53 ┌                 - args:
+  54 │                     - --v=2
+  55 │                     - --cluster-resource-namespace=$(POD_NAMESPACE)
+  56 │                     - --leader-election-namespace=kube-system
+  57 │                     - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.14.5
+  58 │                     - --max-concurrent-challenges=60
+  59 │                   env:
+  60 │                     - name: POD_NAMESPACE
+  61 └                       valueFrom:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+namespace: cert-manager, deployment: cert-manager-webhook (kubernetes)
+======================================================================
+Tests: 139 (SUCCESSES: 133, FAILURES: 6, EXCEPTIONS: 0)
+Failures: 6 (UNKNOWN: 0, LOW: 6, MEDIUM: 0, HIGH: 0, CRITICAL: 0)
+
+LOW: Container 'cert-manager-webhook' of Deployment 'cert-manager-webhook' should set 'resources.limits.cpu'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing CPU limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv011
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-webhook:49-101
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --secure-port=10250
+  52 │                     - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
+  53 │                     - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
+  54 │                     - --dynamic-serving-dns-names=cert-manager-webhook
+  55 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE)
+  56 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE).svc
+  57 └                   env:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-webhook' of Deployment 'cert-manager-webhook' should set 'resources.requests.cpu'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have resource requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv015
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-webhook:49-101
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --secure-port=10250
+  52 │                     - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
+  53 │                     - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
+  54 │                     - --dynamic-serving-dns-names=cert-manager-webhook
+  55 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE)
+  56 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE).svc
+  57 └                   env:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-webhook' of Deployment 'cert-manager-webhook' should set 'resources.requests.memory'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+
+See https://avd.aquasec.com/misconfig/ksv016
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-webhook:49-101
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --secure-port=10250
+  52 │                     - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
+  53 │                     - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
+  54 │                     - --dynamic-serving-dns-names=cert-manager-webhook
+  55 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE)
+  56 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE).svc
+  57 └                   env:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-webhook' of Deployment 'cert-manager-webhook' should set 'resources.limits.memory'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Enforcing memory limits prevents DoS via resource exhaustion.
+
+See https://avd.aquasec.com/misconfig/ksv018
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-webhook:49-101
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --secure-port=10250
+  52 │                     - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
+  53 │                     - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
+  54 │                     - --dynamic-serving-dns-names=cert-manager-webhook
+  55 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE)
+  56 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE).svc
+  57 └                   env:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-webhook' of Deployment 'cert-manager-webhook' should set 'securityContext.runAsUser' > 10000
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv020
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-webhook:49-101
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --secure-port=10250
+  52 │                     - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
+  53 │                     - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
+  54 │                     - --dynamic-serving-dns-names=cert-manager-webhook
+  55 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE)
+  56 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE).svc
+  57 └                   env:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+LOW: Container 'cert-manager-webhook' of Deployment 'cert-manager-webhook' should set 'securityContext.runAsGroup' > 10000
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv021
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, deployment: cert-manager-webhook:49-101
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  49 ┌                 - args:
+  50 │                     - --v=2
+  51 │                     - --secure-port=10250
+  52 │                     - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
+  53 │                     - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
+  54 │                     - --dynamic-serving-dns-names=cert-manager-webhook
+  55 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE)
+  56 │                     - --dynamic-serving-dns-names=cert-manager-webhook.$(POD_NAMESPACE).svc
+  57 └                   env:
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+namespace: cert-manager, role: cert-manager-webhook:dynamic-serving (kubernetes)
+================================================================================
+Tests: 116 (SUCCESSES: 114, FAILURES: 2, EXCEPTIONS: 0)
+Failures: 2 (UNKNOWN: 0, LOW: 0, MEDIUM: 2, HIGH: 0, CRITICAL: 0)
+
+MEDIUM: Role 'cert-manager-webhook:dynamic-serving' shouldn't have access to manage secrets in namespace 'cert-manager'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Viewing secrets at the namespace scope can lead to escalation if another service account in that namespace has a higher privileged rolebinding or clusterrolebinding bound.
+
+See https://avd.aquasec.com/misconfig/ksv113
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, role: cert-manager-webhook:dynamic-serving:32-37
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  32 ┌     - apiGroups:
+  33 │         - ""
+  34 │       resources:
+  35 │         - secrets
+  36 │       verbs:
+  37 └         - create
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+MEDIUM: Role 'cert-manager-webhook:dynamic-serving' shouldn't have access to manage secrets in namespace 'cert-manager'
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Viewing secrets at the namespace scope can lead to escalation if another service account in that namespace has a higher privileged rolebinding or clusterrolebinding bound.
+
+See https://avd.aquasec.com/misconfig/ksv113
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: cert-manager, role: cert-manager-webhook:dynamic-serving:21-31
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  21 ┌     - apiGroups:
+  22 │         - ""
+  23 │       resourceNames:
+  24 │         - cert-manager-webhook-ca
+  25 │       resources:
+  26 │         - secrets
+  27 │       verbs:
+  28 │         - get
+  29 └         - list
+  ..   
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+

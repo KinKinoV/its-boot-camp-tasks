@@ -1,0 +1,25 @@
+
+namespace: kube-public, role: system:controller:bootstrap-signer (kubernetes)
+=============================================================================
+Tests: 115 (SUCCESSES: 114, FAILURES: 1, EXCEPTIONS: 0)
+Failures: 1 (UNKNOWN: 0, LOW: 0, MEDIUM: 1, HIGH: 0, CRITICAL: 0)
+
+MEDIUM: Role 'system:controller:bootstrap-signer' should not have access to resource 'configmaps' for verbs ["create", "update", "patch", "delete", "deletecollection", "impersonate", "*"]
+══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Some workloads leverage configmaps to store sensitive data or configuration parameters that affect runtime behavior that can be modified by an attacker or combined with another issue to potentially lead to compromise.
+
+See https://avd.aquasec.com/misconfig/ksv049
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ namespace: kube-public, role: system:controller:bootstrap-signer:22-29
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  22 ┌     - apiGroups:
+  23 │         - ""
+  24 │       resourceNames:
+  25 │         - cluster-info
+  26 │       resources:
+  27 │         - configmaps
+  28 │       verbs:
+  29 └         - update
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
