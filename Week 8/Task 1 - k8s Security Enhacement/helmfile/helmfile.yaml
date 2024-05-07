@@ -1,0 +1,32 @@
+repositories:
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+  - name: jetstack
+    url: https://charts.jetstack.io
+
+releases:
+  - name: nginx-ingress
+    chart: ingress-nginx/ingress-nginx
+    version: v4.10.1
+    namespace: sample-django
+    set:
+      - name: controller.publishService.enabled
+        value: true
+
+  - name: cert-manager
+    chart: jetstack/cert-manager
+    namespace: cert-manager
+    version: v1.14.5
+    needs: 
+      - sample-django/nginx-ingress
+
+  - name: sample-django
+    chart: ../sample-django-secure
+    namespace: sample-django
+    needs:
+      - cert-manager/cert-manager
+      - sample-django/nginx-ingress
+    values:
+      - ./helm_secrets/django_config.yaml
+    secrets:
+      - ./helm_secrets/django_secrets.yaml

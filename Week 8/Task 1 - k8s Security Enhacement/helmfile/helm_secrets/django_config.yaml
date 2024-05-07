@@ -1,0 +1,48 @@
+image:
+  repository: kinkinov/sample-django
+  pullPolicy: IfNotPresent
+
+persistence:
+  claim:
+    requestedStorage: 1Gi
+    accessModes:
+      - ReadWriteMany
+    storageClassName: nfs-rwx-storage
+
+configMap:
+  data:
+    DJANGO_ALLOWED_HOSTS: "*"
+    DEBUG: "True"
+    DEVELOPMENT_MODE: "False"
+    DJANGO_CSRF_TRUSTED_ORIGINS: "https://django.kinkinov.com,https://django-secure.kinkinov.com"
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+  name: django-port
+
+clusterIssuer:
+  name: letsencrypt-issuer
+  email: mr.kolbasa.ask@gmail.com
+  privateSecretRef: letsencrypt-private-key
+  solvers:
+  - http01:
+      ingress:
+        class: nginx
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+  hosts:
+    - host: django-secure.kinkinov.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+   - secretName: django-tls
+     hosts:
+       - django-secure.kinkinov.com
