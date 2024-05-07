@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.persistence.claim.name }}
+  {{- with .Values.persistence.claim.metadata }}
+    {{- toYaml . | nindent 2}}
+  {{- end }}
+spec:
+  accessModes: {{ .Values.persistence.claim.accessModes | toYaml | nindent 4 }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.claim.requestedStorage }}
+  {{- if .Values.persistence.claim.storageClassName }}
+  storageClassName: {{ .Values.persistence.claim.storageClassName }}
+  {{- else }}
+  volumeName: {{ include "sample-django.name" . }}-static-pv
+  {{- end }}
