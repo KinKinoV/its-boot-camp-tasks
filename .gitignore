@@ -169,3 +169,5 @@ cython_debug/
 
 # ====================================== Other =============================================
 **/zip-ansible.sh
+**/get_resources_to_delete.sh
+**/kibana_cleanup.sh
