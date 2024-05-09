@@ -1,0 +1,56 @@
+persistence:
+  enabled: true
+
+logstashConfig:
+  # http.host is needed for readiness checks
+  logstash.yml: |
+    http.host: 0.0.0.0
+    path.config: /usr/share/logstash/pipeline
+logstashPipeline:
+  logstash.conf: |
+    input {
+      beats {
+        port => 5044
+      }
+    }
+
+    output {
+      elasticsearch {
+          hosts => ["https://trialelkcluster-master:9200"]
+          index => "logstash-%{[kubernetes][namespace]}-%{+YYYY.MM.dd}"
+          user => "${ELASTICSEARCH_USERNAME}"
+          password => "${ELASTICSEARCH_PASSWORD}"
+          cacert => '/usr/share/logstash/config/certs/ca.crt'
+      }
+    }
+
+extraEnvs:
+  - name: ELASTICSEARCH_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: trialelkcluster-master-credentials
+        key: username
+  - name: ELASTICSEARCH_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: trialelkcluster-master-credentials
+        key: password
+
+secretMounts:
+  - name: trialelkcluster-master-certs
+    secretName: trialelkcluster-master-certs
+    path: /usr/share/logstash/config/certs
+
+service:
+  annotations: {}
+  type: ClusterIP
+  loadBalancerIP: ""
+  ports:
+    - name: beats
+      port: 5044
+      protocol: TCP
+      targetPort: 5044
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
