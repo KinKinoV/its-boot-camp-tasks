@@ -1,0 +1,7 @@
+releases:
+  - name: filebeat
+    chart: elastic/filebeat
+    version: v8.5.1
+    namespace: elk
+    values:
+      - ./values/filebeat-values.yaml

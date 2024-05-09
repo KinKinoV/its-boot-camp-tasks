@@ -1,0 +1,7 @@
+releases:
+  - name: logstash
+    chart: elastic/logstash
+    version: v8.5.1
+    namespace: elk
+    values:
+      - ./values/logstash-values.yaml

@@ -1,0 +1,7 @@
+releases:
+  - name: kibana
+    chart: elastic/kibana
+    version: v8.5.1
+    namespace: elk
+    values:
+      - ./values/kibana-values.yaml

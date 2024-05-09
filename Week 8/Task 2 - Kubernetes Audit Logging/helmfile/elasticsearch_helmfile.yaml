@@ -1,0 +1,8 @@
+releases:
+# ELK stack
+  - name: elasticsearch
+    chart: elastic/elasticsearch
+    version: v8.5.1
+    namespace: elk
+    values:
+      - ./values/elastic-values.yaml
