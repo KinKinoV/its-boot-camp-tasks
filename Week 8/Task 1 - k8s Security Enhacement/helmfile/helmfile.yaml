@@ -8,7 +8,7 @@ releases:
   - name: nginx-ingress
     chart: ingress-nginx/ingress-nginx
     version: v4.10.1
-    namespace: sample-django
+    namespace: nginx-ingress
     set:
       - name: controller.publishService.enabled
         value: true
@@ -18,14 +18,14 @@ releases:
     namespace: cert-manager
     version: v1.14.5
     needs: 
-      - sample-django/nginx-ingress
+      - nginx-ingress/nginx-ingress
 
   - name: sample-django
     chart: ../sample-django-secure
     namespace: sample-django
     needs:
       - cert-manager/cert-manager
-      - sample-django/nginx-ingress
+      - nginx-ingress/nginx-ingress
     values:
       - ./helm_secrets/django_config.yaml
     secrets:
