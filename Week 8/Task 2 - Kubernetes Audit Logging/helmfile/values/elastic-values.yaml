@@ -1,4 +1,4 @@
-clusterName: "trialelkcluster"
+clusterName: "elasticsearch"
 replicas: 1 
 minimumMasterNodes: 1 
 createCert: true
