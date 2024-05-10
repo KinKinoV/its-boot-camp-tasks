@@ -8,6 +8,7 @@ After deploying ELK stack to k8s cluster I started getting logs from all nodes a
 ![alt text](/Week%208/Task%202%20-%20Kubernetes%20Audit%20Logging/images/logIndexes.png)
 
 I created several data views, one for each collection available:
+
 ![alt text](/Week%208/Task%202%20-%20Kubernetes%20Audit%20Logging/images/dataViews.png)
 
 And after switching to any data view, I have list of all logs available from specified k8s namespace:
