@@ -1,16 +1,16 @@
-elasticsearchHosts: "https://trialelkcluster-master:9200"
-elasticsearchCertificateSecret: trialelkcluster-master-certs
-elasticsearchCredentialSecret: trialelkcluster-master-credentials
+elasticsearchHosts: "https://elasticsearch-master:9200"
+elasticsearchCertificateSecret: elasticsearch-master-certs
+elasticsearchCredentialSecret: elasticsearch-master-credentials
 ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-issuer
   hosts:
-    - host: kibana.kinkinov.com
+    - host: monitoring.kinkinov.com
       paths:
         - path: /
   tls:
     - secretName: kibana-tls
       hosts:
-        - kibana.kinkinov.com
+        - monitoring.kinkinov.com
