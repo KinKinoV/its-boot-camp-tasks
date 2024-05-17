@@ -1,0 +1,21 @@
+---
+# tasks file for configure_kubectl
+- name: Insert shebang to indicate Ansible managed values
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "# ANSIBLE MANAGED k8s hosts"
+  become: true
+
+- name: Ensure control_plane node mapping is in /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "{{ hostvars[item]['ansible_facts']['default_ipv4']['address'] }}   {{ item }}.kubernetes.local    {{ item }}"
+    insertafter: "# ANSIBLE MANAGED k8s hosts"
+  become: true
+  loop: "{{ groups['control_plane'] }}"
+
+- name: Install admin.kubeconfig as default kubeconfig
+  ansible.builtin.copy:
+    src: "{{ generate_configs_files_path }}/admin.kubeconfig"
+    dest: /home/{{ ansible_user_id }}/.kube/config
+    mode: '0600'
