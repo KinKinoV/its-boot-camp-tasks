@@ -1,0 +1,23 @@
+---
+# tasks file for bootstrap_etcd
+- name: Dowload and install etcd
+  ansible.builtin.import_tasks: download-and-install-etcd.yml
+
+- name: Copy needed configs to master node
+  ansible.builtin.import_tasks: copy-config.yml
+
+- name: Configure etcd
+  ansible.builtin.import_tasks: etcd-configuration.yml
+
+- name: Enable etcd.service
+  ansible.builtin.systemd_service:
+    daemon_reload: true
+    name: etcd
+    enabled: true
+  become: true
+
+- name: Start etcd.service
+  ansible.builtin.service:
+    name: etcd
+    state: started
+  become: true

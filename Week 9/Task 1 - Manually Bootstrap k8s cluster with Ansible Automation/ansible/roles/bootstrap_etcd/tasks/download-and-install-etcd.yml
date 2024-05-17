@@ -1,0 +1,36 @@
+---
+- name: Set binary architecture type to amd64
+  ansible.builtin.set_fact:
+    binary_arch: amd64
+  when: hostvars[inventory_hostname]['ansible_facts']['architecture'] == "x86_64"
+
+- name: Set binary architecture type to arm64
+  ansible.builtin.set_fact:
+    binary_arch: amd64
+  when: hostvars[inventory_hostname]['ansible_facts']['architecture'] == "aarch64"
+
+- name: Download and unarchive etcd tar.gz
+  ansible.builtin.unarchive:
+    src: https://github.com/etcd-io/etcd/releases/download/v3.4.32/etcd-v3.4.32-linux-{{ binary_arch }}.tar.gz
+    dest: "/tmp"
+    creates: "/tmp/etcd-v3.4.32-linux-{{ binary_arch }}/"
+    remote_src: true
+  become: true
+
+- name: Find all etcd* binaries in untared archive
+  ansible.builtin.find:
+    paths: "/tmp/etcd-v3.4.32-linux-{{ binary_arch }}"
+    patterns: "etcd*"
+    file_type: file
+  register: etcd_binaries
+
+- name: Move etcd binaries to /usr/local/bin
+  ansible.builtin.copy:
+    remote_src: true
+    src: "{{ item.path }}"
+    dest: /usr/local/bin/
+    owner: root
+    group: root
+    mode: '0700'
+  loop: "{{ etcd_binaries.files }}"
+  become: true
