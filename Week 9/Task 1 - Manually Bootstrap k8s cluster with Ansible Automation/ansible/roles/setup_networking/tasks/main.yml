@@ -1,0 +1,7 @@
+---
+# tasks file for setup_networking
+- name: Change hostname and /etc/hosts
+  ansible.builtin.import_tasks: change_hostnames.yml
+
+- name: Configure DNS for node
+  ansible.builtin.import_tasks: configure_dns.yml
