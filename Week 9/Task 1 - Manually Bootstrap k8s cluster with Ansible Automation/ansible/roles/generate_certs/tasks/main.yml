@@ -1,0 +1,34 @@
+---
+# tasks file for generate_certs
+- name: (SETUP) Ensure k8s certificate folder exists
+  ansible.builtin.file:
+    path: "{{ generate_certs_certificate_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Create CA key and certificate
+  ansible.builtin.import_tasks: ca.yml
+
+- name: Admin .key, .csr, .crt
+  ansible.builtin.import_tasks: admin.yml
+
+- name: "Worker .key, .csr, .crt for {{ item }}"
+  ansible.builtin.include_tasks: nodes.yml
+  vars:
+    node: "{{ item }}"
+  loop: "{{ groups['worker_nodes'] }}"
+
+- name: Generate kube-proxy .key, .csr, .crt
+  ansible.builtin.import_tasks: kube-proxy.yml
+
+- name: Generate kube-scheduler .key, .csr, .crt
+  ansible.builtin.import_tasks: kube-scheduler.yml
+
+- name: Generate kube-controller-manager .key, .csr, .crt
+  ansible.builtin.import_tasks: kube-controller-manager.yml
+
+- name: Generate kube-api-server .key, .csr, .crt
+  ansible.builtin.import_tasks: kube-api-server.yml
+
+- name: Generate service-accounts .key, .csr, .crt
+  ansible.builtin.import_tasks: service-accounts.yml

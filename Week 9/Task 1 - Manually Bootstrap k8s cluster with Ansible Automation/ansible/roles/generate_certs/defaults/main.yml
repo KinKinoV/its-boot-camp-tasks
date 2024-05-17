@@ -1,0 +1,3 @@
+---
+# defaults file for generate_certs
+generate_certs_certificate_path: /etc/ssl/k8s_certs/

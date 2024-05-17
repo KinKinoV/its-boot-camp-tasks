@@ -1,0 +1,36 @@
+---
+- name: "(1/3) Creating private key for {{ node }}"
+  community.crypto.openssl_privatekey:
+    path: "{{ generate_certs_certificate_path }}/{{ node }}.key"
+    mode: "0644"
+
+- name: "(2/3) Creating CSR for {{ node }}"
+  community.crypto.openssl_csr:
+    path: "{{ generate_certs_certificate_path }}/{{ node }}.csr"
+    privatekey_path: "{{ generate_certs_certificate_path }}/{{ node }}.key"
+    basic_constraints:
+      - CA:FALSE
+    key_usage:
+      - digitalSignature
+      - keyEncipherment
+    key_usage_critical: true
+    extended_key_usage:
+      - clientAuth
+      - serverAuth
+    create_subject_key_identifier: true
+    subject_alt_name:
+      - "DNS:{{ node }}"
+      - IP:127.0.0.1
+    CN: admin
+    O: system:masters
+
+- name: "(3/3) Creating certificate for {{ node }}"
+  community.crypto.x509_certificate:
+    path: "{{ generate_certs_certificate_path }}/{{ node }}.crt"
+    privatekey_path: "{{ generate_certs_certificate_path }}/{{ node }}.key"
+    csr_path: "{{ generate_certs_certificate_path }}/{{ node }}.csr"
+    provider: ownca
+    ownca_path: "{{ generate_certs_certificate_path }}/ca.crt"
+    ownca_privatekey_path: "{{ generate_certs_certificate_path }}/ca.key"
+    selfsigned_not_after: "+3650d"
+    mode: "0644"
