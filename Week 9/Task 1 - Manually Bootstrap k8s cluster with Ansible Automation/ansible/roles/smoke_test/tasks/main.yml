@@ -1,0 +1,54 @@
+---
+# tasks file for smoke_test
+- name: Wait for nodes to be ready
+  ansible.builtin.command: kubectl get nodes
+  register: result
+  until: result.stdout.find("NotReady") == -1
+  retries: 15
+  delay: 10
+
+- name: Deploy nginx app
+  ansible.builtin.command: kubectl create deployment nginx --image=nginx:latest
+
+- name: Waiting for nginx app to be ready
+  ansible.builtin.command: kubectl get pods -l app=nginx
+  register: result
+  until: result.stdout.find("Running") != -1
+  retries: 15
+  delay: 10
+
+- name: Get pod name
+  ansible.builtin.command: kubectl get pods -l app=nginx -o jsonpath="{.items[0].metadata.name}"
+  register: pod_name
+
+- name: Get pod logs
+  ansible.builtin.command: "kubectl logs {{ pod_name.stdout }}"
+  register: pod_logs
+
+- name: Show fetched pod logs
+  ansible.builtin.debug:
+    msg: "{{ pod_logs.stdout }}"
+
+- name: Try to kubectl exec on pod
+  ansible.builtin.command: "kubectl exec -it {{ pod_name.stdout }} -- nginx -v"
+  register: exec_result
+
+- name: Show fetched exec result
+  ansible.builtin.debug:
+    msg: "{{ exec_result }}"
+
+- name: Test services
+  ansible.builtin.command: kubectl expose deployment nginx --port 80 --type NodePort
+
+- name: Get NodePort
+  ansible.builtin.command: kubectl get svc nginx --output=jsonpath='{range .spec.ports[0]}{.nodePort}'
+  register: node_port
+
+- name: Try to curl nginx on every pod
+  ansible.builtin.command: "curl -I http://{{ item }}:{{ node_port.stdout }} -m 5"
+  register: curl_output
+  loop: "{{ groups['worker_nodes'] }}"
+
+- name: Show curl result
+  ansible.builtin.debug:
+    msg: "{{ curl_output }}"
