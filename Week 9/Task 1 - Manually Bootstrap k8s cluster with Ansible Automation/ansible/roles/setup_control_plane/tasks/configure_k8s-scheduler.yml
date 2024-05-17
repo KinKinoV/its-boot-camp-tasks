@@ -1,0 +1,27 @@
+---
+- name: Copy kube-scheduler.kubeconfig to /var/lib/kubernetes/
+  ansible.builtin.copy:
+    src: "{{ generate_configs_files_path }}/kube-scheduler.kubeconfig"
+    dest: /var/lib/kubernetes/kube-scheduler.kubeconfig
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: Copy kube-scheduler.yaml to /etc/kubernetes/config
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/files/kube-scheduler.yaml"
+    dest: /etc/kubernetes/config/kube-scheduler.yaml
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: Copy kube-scheduler.service to /etc/systemd/system
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/files/kube-scheduler.service"
+    dest: /etc/systemd/system/kube-scheduler.service
+    owner: root
+    group: root
+    mode: '0644'
+  become: true

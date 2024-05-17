@@ -1,0 +1,27 @@
+---
+- name: Ensure /etc/kubernetes directory exists
+  ansible.builtin.file:
+    path: /etc/kubernetes
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /etc/kubernetes/config directory
+  ansible.builtin.file:
+    path: /etc/kubernetes/config
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /var/lib/kubernetes directory
+  ansible.builtin.file:
+    path: /var/lib/kubernetes
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true

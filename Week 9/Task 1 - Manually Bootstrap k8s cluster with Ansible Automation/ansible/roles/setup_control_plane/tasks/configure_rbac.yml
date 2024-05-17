@@ -1,0 +1,20 @@
+---
+- name: Copy admin.kubeconfig for kubectl access
+  ansible.builtin.copy:
+    src: "{{ generate_configs_files_path }}/admin.kubeconfig"
+    dest: /tmp/admin.kubeconfig
+    mode: '0644'
+
+- name: Copy kube-apiserver-to-kubelet.yaml to create roles
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/files/kube-apiserver-to-kubelet.yaml"
+    dest: /tmp/kube-apiserver-to-kubelet.yaml
+    mode: '0644'
+
+- name: Apply ClusterRole to k8s cluster
+  ansible.builtin.command: kubectl apply -f /tmp/kube-apiserver-to-kubelet.yaml --kubeconfig /tmp/admin.kubeconfig
+
+- name: Remove admin.kubeconfig
+  ansible.builtin.file:
+    path: /tmp/admin.kubeconfig
+    state: absent
