@@ -7,11 +7,11 @@ In this task I deployed Kubernetes the Hard way on locally deployed virtual mach
 To successfully use ansible playbook provided in this [repository](/Week%209/Task%201%20-%20Manually%20Bootstrap%20k8s%20cluster%20with%20Ansible%20Automation/ansible/setup_cluster.yml) you have to follow next steps:
 1. You should deploy jumbox(optional), server and desirable ammount of node-* (or worker) virtual machines with minimal requirements of at least:
 
-| Name    | Description            | CPU | RAM   | Storage |
-|---------|------------------------|-----|-------|---------|
-| jumpbox | Administration host    | 1   | 512MB | 10GB    |
-| server  | Kubernetes server      | 1   | 2GB   | 20GB    |
-| node-*  | Kubernetes worker node | 1   | 2GB   | 20GB    |
+    | Name    | Description            | CPU | RAM   | Storage |
+    |---------|------------------------|-----|-------|---------|
+    | jumpbox | Administration host    | 1   | 512MB | 10GB    |
+    | server  | Kubernetes server      | 1   | 2GB   | 20GB    |
+    | node-*  | Kubernetes worker node | 1   | 2GB   | 20GB    |
 
 2. Copy `ansible/` folder to `jumpbox` machine
 3. Edit [`inventory.yml`](/Week%209/Task%201%20-%20Manually%20Bootstrap%20k8s%20cluster%20with%20Ansible%20Automation/ansible/inventory.yml) to have all deployed VMs, but `jumpbox` config mustn't be edited! Also add `ansible_become_password` as needed
@@ -20,10 +20,10 @@ To successfully use ansible playbook provided in this [repository](/Week%209/Tas
     - 4.2 Don't forget to set `k8s_cluster_cidr`
 5. Configure ssh connection between `jumpbox` and other VMs
 6. Execute next command in `ansible/` directory if you set `ansible_become_password` in `inventory.yml`:
-```bash
-ansible-playbook -i inventory.yml setup_cluster.yml
-```
-Otherwise add `-K` flag and input common sudo password for VMs provisioned.
+    ```bash
+    ansible-playbook -i inventory.yml setup_cluster.yml
+    ```
+    Otherwise add `-K` flag and input common sudo password for VMs provisioned.
 7. If play was successfull, you will be able to execute `kubectl get pods` from `jumpbox` machine and see nginx pod like on this screenshot:
 ![alt text](/Week%209/Task%201%20-%20Manually%20Bootstrap%20k8s%20cluster%20with%20Ansible%20Automation/screenshots/after_play_get_pods.png)
 
