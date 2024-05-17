@@ -16,8 +16,8 @@ To successfully use ansible playbook provided in this [repository](/Week%209/Tas
 2. Copy `ansible/` folder to `jumpbox` machine
 3. Edit [`inventory.yml`](/Week%209/Task%201%20-%20Manually%20Bootstrap%20k8s%20cluster%20with%20Ansible%20Automation/ansible/inventory.yml) to have all deployed VMs, but `jumpbox` config mustn't be edited! Also add `ansible_become_password` as needed
 4. Edit [`variables.yml`](/Week%209/Task%201%20-%20Manually%20Bootstrap%20k8s%20cluster%20with%20Ansible%20Automation/ansible/variables.yml) to suit your preferences
-    4.1 `k8s_subnets` must have the same ammount of subnets as there are worker nodes in `inventory.yml`
-    4.2 Don't forget to set `k8s_cluster_cidr`
+    - `k8s_subnets` must have the same ammount of subnets as there are worker nodes in `inventory.yml`
+    - 4.2 Don't forget to set `k8s_cluster_cidr`
 5. Configure ssh connection between `jumpbox` and other VMs
 6. Execute next command in `ansible/` directory if you set `ansible_become_password` in `inventory.yml`:
 ```bash
