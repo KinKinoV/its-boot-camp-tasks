@@ -1,0 +1,99 @@
+---
+- name: Set fact list of binaries to download from dl.k8s.io
+  ansible.builtin.set_fact:
+    binaries_to_download:
+      - kubectl
+      - kubelet
+      - kube-proxy
+
+- name: Kubernetes dl.k8s.io downloads
+  ansible.builtin.get_url:
+    url: https://dl.k8s.io/v1.30.1/bin/linux/{{ binary_arch }}/{{ item }}
+    dest: /tmp/{{ item }}
+    checksum: sha256:https://dl.k8s.io/v1.30.1/bin/linux/{{ binary_arch }}/{{ item }}.sha256
+    mode: +x
+  loop: "{{ binaries_to_download }}"
+
+- name: Copy dl.k8s.io binaries to /usr/local/bin
+  ansible.builtin.copy:
+    remote_src: true
+    src: /tmp/{{ item }}
+    dest: /usr/local/bin/{{ item }}
+    mode: '0755'
+  become: true
+  loop: "{{ binaries_to_download }}"
+
+- name: Download crictl-v1.30.0 for node's architecture
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.30.0/crictl-v1.30.0-linux-{{ binary_arch }}.tar.gz
+    dest: /tmp/crictl.d
+    creates: /tmp/crictl.d/crictl
+
+- name: Install crictl
+  ansible.builtin.copy:
+    remote_src: true
+    src: /tmp/crictl.d/crictl
+    dest: /usr/local/bin/
+    mode: '0755'
+  become: true
+
+- name: Download runc for node's architecture
+  ansible.builtin.get_url:
+    url: https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.{{ binary_arch }}
+    dest: /tmp/runc
+    mode: +x
+
+- name: Install runc
+  ansible.builtin.copy:
+    remote_src: true
+    src: /tmp/runc
+    dest: /usr/local/bin/runc
+    mode: '0755'
+  become: true
+
+- name: Download cni-plugins-linux for node's architecture
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: https://github.com/containernetworking/plugins/releases/download/v1.4.1/cni-plugins-linux-{{ binary_arch }}-v1.4.1.tgz
+    dest: /tmp/cni-plugins
+    creates: /tmp/cni-plugins/ipvlan
+
+- name: Find all cni-plugin files in untared archive
+  ansible.builtin.find:
+    paths: "/tmp/cni-plugins/"
+    patterns: "*"
+    file_type: file
+  register: cni_plugins
+
+- name: Install cni-plugins
+  ansible.builtin.copy:
+    remote_src: true
+    src: "{{ item.path }}"
+    dest: /opt/cni/bin/
+    mode: '0755'
+  loop: "{{ cni_plugins.files }}"
+  become: true
+
+- name: Download containerd 1.7.17 for node's architecture
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: https://github.com/containerd/containerd/releases/download/v1.7.17/containerd-1.7.17-linux-{{ binary_arch }}.tar.gz
+    dest: /tmp
+    creates: /tmp/bin
+
+- name: Find all containerd binaries in untared archive
+  ansible.builtin.find:
+    paths: "/tmp/bin"
+    patterns: "*"
+    file_type: file
+  register: containerd_binaries
+
+- name: Install containerd binaries
+  ansible.builtin.copy:
+    remote_src: true
+    src: "{{ item.path }}"
+    dest: /bin/
+    mode: '0755'
+  loop: "{{ containerd_binaries.files }}"
+  become: true

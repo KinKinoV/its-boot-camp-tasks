@@ -1,0 +1,14 @@
+---
+- name: Copy containerd-config.toml to /etc/containerd
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/files/containerd-config.toml"
+    dest: /etc/containerd/config.toml
+    mode: '0644'
+  become: true
+
+- name: Copy containerd.service to /etc/systemd/system
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/files/containerd.service"
+    dest: /etc/systemd/system/containerd.service
+    mode: '0644'
+  become: true

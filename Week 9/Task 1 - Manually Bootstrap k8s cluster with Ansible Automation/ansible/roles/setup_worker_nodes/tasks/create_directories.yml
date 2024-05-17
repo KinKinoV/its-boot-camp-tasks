@@ -1,0 +1,95 @@
+---
+- name: Create /etc/cni directory
+  ansible.builtin.file:
+    path: /etc/cni
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /etc/cni/net.d directory
+  ansible.builtin.file:
+    path: /etc/cni/net.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /etc/containerd directory
+  ansible.builtin.file:
+    path: /etc/containerd
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /opt/cni directory
+  ansible.builtin.file:
+    path: /opt/cni
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /opt/cni/bin directory
+  ansible.builtin.file:
+    path: /opt/cni/bin
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /var/lib/kubelet
+  ansible.builtin.file:
+    path: /var/lib/kubelet
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /var/lib/kube-proxy
+  ansible.builtin.file:
+    path: /var/lib/kube-proxy
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /var/lib/kubernetes
+  ansible.builtin.file:
+    path: /var/lib/kubernetes
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /var/run/kubernetes
+  ansible.builtin.file:
+    path: /var/run/kubernetes
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Create /tmp/crictl.d
+  ansible.builtin.file:
+    path: /tmp/crictl.d
+    state: directory
+    mode: '0755'
+  become: true
+
+- name: Create /tmp/cni-plugins
+  ansible.builtin.file:
+    path: /tmp/cni-plugins
+    state: directory
+    mode: '0755'
+  become: true

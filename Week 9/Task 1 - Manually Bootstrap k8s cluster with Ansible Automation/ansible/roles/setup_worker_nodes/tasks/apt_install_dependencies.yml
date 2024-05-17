@@ -1,0 +1,18 @@
+---
+- name: Install socat
+  ansible.builtin.apt:
+    name: socat
+    state: present
+  become: true
+
+- name: Install conntrack
+  ansible.builtin.apt:
+    name: conntrack
+    state: present
+  become: true
+
+- name: Install ipset
+  ansible.builtin.apt:
+    name: ipset
+    state: present
+  become: true

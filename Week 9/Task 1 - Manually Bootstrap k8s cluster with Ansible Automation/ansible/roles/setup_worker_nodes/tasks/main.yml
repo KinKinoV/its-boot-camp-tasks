@@ -1,0 +1,50 @@
+---
+- name: Set binary architecture type to amd64
+  ansible.builtin.set_fact:
+    binary_arch: amd64
+  when: hostvars[inventory_hostname]['ansible_facts']['architecture'] == "x86_64"
+
+- name: Set binary architecture type to arm64
+  ansible.builtin.set_fact:
+    binary_arch: amd64
+  when: hostvars[inventory_hostname]['ansible_facts']['architecture'] == "aarch64"
+
+- name: Ensure required directories exist
+  ansible.builtin.import_tasks: create_directories.yml
+
+- name: Download and install needed binaries
+  ansible.builtin.import_tasks: download_binaries.yml
+
+- name: Install OS dependencies
+  ansible.builtin.import_tasks: apt_install_dependencies.yml
+
+- name: Disable swap
+  ansible.builtin.import_tasks: disable_swap.yml
+
+- name: Configure CNI networking
+  ansible.builtin.import_tasks: configure_cni.yml
+
+- name: Configure containerd
+  ansible.builtin.import_tasks: configure_containerd.yml
+
+- name: Configure Kubelet
+  ansible.builtin.import_tasks: configure_kubelet.yml
+
+- name: Configure k8s proxy
+  ansible.builtin.import_tasks: configure_k8s-proxy.yml
+
+- name: Reload daemon
+  ansible.builtin.systemd_service:
+    daemon_reload: true
+  become: true
+
+- name: Start needed services
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  become: true
+  loop:
+    - containerd
+    - kubelet
+    - kube-proxy

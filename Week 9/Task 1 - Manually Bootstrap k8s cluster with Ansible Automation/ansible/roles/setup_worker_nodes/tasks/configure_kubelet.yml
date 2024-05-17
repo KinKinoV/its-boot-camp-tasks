@@ -1,0 +1,44 @@
+---
+- name: Template kubelet-config.yaml to /var/lib/kubelet
+  ansible.builtin.template:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/templates/kubelet-config.yaml.j2"
+    dest: /var/lib/kubelet/kubelet-config.yaml
+    mode: '0644'
+  become: true
+  vars:
+    node_subnet: "{{ k8s_subnets[inventory_hostname] }}"
+
+- name: Copy node kubeconfig to /var/lib/kubelet
+  ansible.builtin.copy:
+    src: "{{ generate_configs_files_path }}/{{ inventory_hostname }}.kubeconfig"
+    dest: /var/lib/kubelet/kubeconfig
+    mode: '0644'
+  become: true
+
+- name: Copy ca.crt to node's to /var/lib/kubelet
+  ansible.builtin.copy:
+    src: "{{ generate_certs_certificate_path }}/ca.crt"
+    dest: /var/lib/kubelet/ca.crt
+    mode: '0644'
+  become: true
+
+- name: Copy to node's .crt to /var/lib/kubelet
+  ansible.builtin.copy:
+    src: "{{ generate_certs_certificate_path }}/{{ inventory_hostname }}.crt"
+    dest: /var/lib/kubelet/kubelet.crt
+    mode: '0644'
+  become: true
+
+- name: Copy to node's .key to /var/lib/kubelet
+  ansible.builtin.copy:
+    src: "{{ generate_certs_certificate_path }}/{{ inventory_hostname }}.key"
+    dest: /var/lib/kubelet/kubelet.key
+    mode: '0644'
+  become: true
+
+- name: Copy kubelet.service to /etc/systemd/system/
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/files/kubelet.service"
+    dest: /etc/systemd/system/kubelet.service
+    mode: '0644'
+  become: true

@@ -1,0 +1,16 @@
+---
+- name: Template 10-bridge.conf to /etc/cni/net.d
+  ansible.builtin.template:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/templates/10-bridge.conf.j2"
+    dest: /etc/cni/net.d/10-bridge.conf
+    mode: '0644'
+  become: true
+  vars:
+    node_subnet: "{{ k8s_subnets[inventory_hostname] }}"
+
+- name: Copy 99-loopback.conf to /etc/cni/net.d
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/files/99-loopback.conf"
+    dest: /etc/cni/net.d/99-loopback.conf
+    mode: '0644'
+  become: true

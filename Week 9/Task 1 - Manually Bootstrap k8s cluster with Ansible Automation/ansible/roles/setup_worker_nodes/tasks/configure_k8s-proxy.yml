@@ -1,0 +1,23 @@
+---
+- name: Template kube-proxy-config.yaml to /var/lib/kube-proxy
+  ansible.builtin.template:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/templates/kube-proxy-config.yaml.j2"
+    dest: /var/lib/kube-proxy/kube-proxy-config.yaml
+    mode: '0644'
+  become: true
+  vars:
+    cluster_cidr: "{{ k8s_cluster_cidr }}"
+
+- name: Copy kube-proxy.kubeconfig to /var/lib/kube-proxy
+  ansible.builtin.copy:
+    src: "{{ generate_configs_files_path }}/kube-proxy.kubeconfig"
+    dest: /var/lib/kube-proxy/kubeconfig
+    mode: '0644'
+  become: true
+
+- name: Copy kube-proxy.service to /etc/systemd/system/
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/roles/{{ ansible_role_name }}/files/kube-proxy.service"
+    dest: /etc/systemd/system/kube-proxy.service
+    mode: '0644'
+  become: true
