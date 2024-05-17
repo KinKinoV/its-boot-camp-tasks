@@ -30,10 +30,13 @@ To successfully use ansible playbook provided in this [repository](/Week%209/Tas
 ## Personal deployment test
 
 Before publishing code for this task I tested playbook on locally deployed VMs. Clean playbook installation followed with next recap:
+
 ![alt text](/Week%209/Task%201%20-%20Manually%20Bootstrap%20k8s%20cluster%20with%20Ansible%20Automation/screenshots/First_play.png)
 
 I had a bug in `smoke_test` role due to me forgeting to remove unneded task. After removing problematic step and applying playbook once again I had successfull deployment, which also tested playbook's idempotency:
+
 ![alt text](/Week%209/Task%201%20-%20Manually%20Bootstrap%20k8s%20cluster%20with%20Ansible%20Automation/screenshots/play_after_debug.png)
 
 In the end I was able to access nginx default page in web browser:
+
 ![alt text](/Week%209/Task%201%20-%20Manually%20Bootstrap%20k8s%20cluster%20with%20Ansible%20Automation/screenshots/nginx_test_connection.png)
