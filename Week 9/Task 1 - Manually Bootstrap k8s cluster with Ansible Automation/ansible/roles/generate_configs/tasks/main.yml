@@ -1,0 +1,25 @@
+---
+# tasks file for generate_configs
+- name: (SETUP) Ensure kubeconfig files directory is present
+  ansible.builtin.file:
+    path: "{{ generate_configs_files_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Generate worker-nodes kubeconfigs
+  ansible.builtin.include_tasks: nodes_kubeconfig.yml
+  vars:
+    node: "{{ item }}"
+  loop: "{{ groups['worker_nodes'] }}"
+
+- name: Generate admin kubeconfig
+  ansible.builtin.import_tasks: admin_kubeconfig.yml
+
+- name: Generate other kubeconfigs
+  ansible.builtin.include_tasks: others_kubeconfig.yml
+  vars:
+    component: "{{ item }}"
+  loop:
+    - kube-proxy
+    - kube-controller-manager
+    - kube-scheduler

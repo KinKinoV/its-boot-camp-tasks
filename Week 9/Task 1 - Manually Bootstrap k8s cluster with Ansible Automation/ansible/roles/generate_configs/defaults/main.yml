@@ -1,0 +1,5 @@
+---
+# defaults file for generate_configs
+generate_configs_files_path: ~/kubeconfigs
+k8s_cluster_name: kubernetes-the-hard-way
+generate_configs_context_name: default
